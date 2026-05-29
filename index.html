@@ -1205,7 +1205,22 @@ function bind(){
 
 const binsEl=document.querySelector(".bins");
 if(binsEl)binsEl.addEventListener("click",e=>{
+  const item=e.target.closest(".ic");
+
+  if(item){
+    sel={type:item.dataset.type,id:item.dataset.id};
+    mode="detail";
+    menuState=null;
+    adding=null;
+    editNote=null;
+    addSubFor=null;
+    mobileSidebarOpen=false;
+    render();
+    return;
+  }
+
   if(!isMobileLayout())return;
+
   if(!mobileSidebarOpen){
     mobileSidebarOpen=true;
     render();
