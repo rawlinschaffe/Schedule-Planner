@@ -107,7 +107,7 @@ body{font-family:var(--font-sans);}
     min-width:0;
     max-width:320px;
     z-index:60;
-    transform:translateX(calc(-100% + 18px));
+    transform:translateX(calc(-100% + 22px));
     transition:transform .18s ease;
     box-shadow:2px 0 16px rgba(0,0,0,.18);
     border-right:0.5px solid var(--color-border-secondary);
@@ -116,31 +116,33 @@ body{font-family:var(--font-sans);}
   .bins::after{
     content:"";
     position:absolute;
-    top:0;
-    right:-18px;
-    width:18px;
-    height:100%;
-    background:var(--color-background-tertiary);
-    border-right:0.5px solid var(--color-border-secondary);
-    box-shadow:2px 0 8px rgba(0,0,0,.08);
+    top:38%;
+    right:-34px;
+    width:34px;
+    height:92px;
+    background:var(--color-background-info);
+    border:0.5px solid var(--color-border-info);
+    border-left:none;
+    border-radius:0 12px 12px 0;
+    box-shadow:2px 2px 10px rgba(0,0,0,.16);
   }
   .bins::before{
-    content:"›";
+    content:"☰";
     position:absolute;
-    top:50%;
-    right:-17px;
-    transform:translateY(-50%);
-    width:18px;
-    height:48px;
+    top:calc(38% + 23px);
+    right:-34px;
+    width:34px;
+    height:46px;
     display:flex;
     align-items:center;
     justify-content:center;
-    color:var(--color-text-tertiary);
+    color:var(--color-text-info);
     font-size:20px;
+    font-weight:700;
     z-index:2;
     pointer-events:none;
   }
-  .wrap.sidebar-open .bins::before{content:"‹";}
+  .wrap.sidebar-open .bins::before{content:"‹";font-size:28px;}
   .pnl{
     height:100vh;
     width:100vw;
@@ -163,6 +165,58 @@ body{font-family:var(--font-sans);}
   .btn{font-size:12px;}
   .item-title{font-size:15px;}
 }
+
+
+.gsync-hero{display:flex;align-items:flex-start;gap:10px;padding:12px;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);margin-bottom:.8rem}
+.gsync-hero i{font-size:24px;color:var(--color-text-info);margin-top:1px}
+.gsync-title{font-size:15px;font-weight:600;color:var(--color-text-primary);line-height:1.25}
+.gsync-sub{font-size:12px;color:var(--color-text-secondary);line-height:1.45;margin-top:3px}
+.gsync-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:8px;margin:.75rem 0}
+.gcard{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);background:var(--color-background-primary);padding:10px}
+.gcard.soft{background:var(--color-background-secondary)}
+.gcard-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:7px}
+.gcard-title{font-size:12px;font-weight:650;color:var(--color-text-primary);display:flex;align-items:center;gap:6px}
+.gcard-title i{font-size:14px;color:var(--color-text-secondary)}
+.gmuted{font-size:11px;color:var(--color-text-tertiary);line-height:1.45}
+.gstatus{display:inline-flex;align-items:center;gap:4px;font-size:10px;border:0.5px solid var(--color-border-secondary);border-radius:99px;padding:2px 7px;color:var(--color-text-tertiary)}
+.gstatus.on{color:var(--color-text-success);border-color:var(--color-border-success);background:var(--color-background-success)}
+.gactions{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.gprimary-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px;border:0.5px solid var(--color-border-info);border-radius:var(--border-radius-lg);background:var(--color-background-info);margin:.75rem 0}
+.gprimary-row .btn{font-weight:600}
+.gdetails{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);background:var(--color-background-primary);margin:.65rem 0;overflow:hidden}
+.gdetails summary{cursor:pointer;list-style:none;padding:10px;display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;font-weight:650;color:var(--color-text-primary)}
+.gdetails summary::-webkit-details-marker{display:none}
+.gdetails summary:after{content:"+";font-size:18px;color:var(--color-text-tertiary);line-height:1}
+.gdetails[open] summary:after{content:"−"}
+.gdetails-body{padding:0 10px 10px}
+.gmini{font-size:11px;color:var(--color-text-secondary);line-height:1.5}
+
+  /* Mobile navigation handle */
+  .bins::after{
+    top:38%;
+    right:-34px;
+    width:34px;
+    height:92px;
+    background:var(--color-background-info);
+    border:0.5px solid var(--color-border-info);
+    border-left:none;
+    border-radius:0 12px 12px 0;
+    box-shadow:2px 2px 10px rgba(0,0,0,.16);
+  }
+  .bins::before{
+    content:"☰";
+    top:calc(38% + 23px);
+    right:-34px;
+    width:34px;
+    height:46px;
+    color:var(--color-text-info);
+    font-size:20px;
+    font-weight:700;
+  }
+  .wrap.sidebar-open .bins::before{content:"‹";font-size:28px;}
+  .pnl{padding-left:2.15rem;}
+
+@media(max-width:700px){.gsync-grid{grid-template-columns:1fr}.gprimary-row{align-items:stretch}.gprimary-row .btn{width:100%}}
 
 </style>
 <script src="https://accounts.google.com/gsi/client" async defer></script>
@@ -859,6 +913,14 @@ async function savePlannerToDrive(){
   if(!ensureGoogleReady('drive'))return;
   try{
     const existing=await findDriveBackupFile();
+    if(existing){
+      const when=existing.modifiedTime?tinyTime(existing.modifiedTime):"an earlier time";
+      const ok=confirm("A Google Drive backup already exists from "+when+".\n\nSaving now will replace that Drive backup with this device's current planner. Continue?");
+      if(!ok){
+        showToast("Drive save canceled.");
+        return;
+      }
+    }
     const metadata={name:DRIVE_BACKUP_FILE_NAME,parents:["appDataFolder"]};
     const payload=JSON.stringify(makeDriveBackupPayload());
     const boundary="schedule_planner_boundary_"+Date.now();
@@ -1068,11 +1130,47 @@ function rPanel(){if(menuState==="tmpl-project"||menuState==="tmpl-meeting")retu
 function rBins(b){const dv='<div style="height:0.5px;background:var(--color-border-tertiary)"></div>';let ind="";if(binCatFilter.size>0){const dots=[...binCatFilter].map(id=>{const c=getCat(id);return c?'<span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:'+c.color+'"></span>':""}).join("");ind='<div style="display:flex;align-items:center;gap:4px;padding:2px 0 5px;border-bottom:0.5px solid var(--color-border-tertiary);margin-bottom:.2rem"><span style="font-size:10px;color:var(--color-text-tertiary)">Filtering</span>'+dots+'<button data-a="clear-bin-filter" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--color-text-tertiary);margin-left:auto;padding:0">clear</button></div>';}return ind+[rBin("Active projects","#c97d30",b.active,"project",true,false),dv,rBin("Completed projects","#888",b.done,"project",false,false),dv,rBin("Upcoming meetings","#1D9E75",b.upcoming,"meeting",true,false),dv,rBin("Past meetings","#5F9EC5",b.past,"meeting",false,true)].join("");}
 function rBin(label,color,items,type,canAdd,isPast){const add=canAdd?'<button class="ib" data-a="add-'+type+'">+</button>':"";const maxH=SETT.itemsPerSection>0?"max-height:"+SETT.itemsPerSection*44+"px;overflow-y:auto":"";const cards=items.length===0?'<div class="empty">'+(binCatFilter.size>0?"None match filter":"Nothing here")+'</div>':items.map(item=>{const isSel=sel?.id===item.id;const dots=(item.categoryIds||[]).map(cid=>{const c=getCat(cid);return c?'<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:'+c.color+'"></span>':""}).join("");const meta=item.date?fd(item.date):(item.completedAt?"Done "+fd(item.completedAt):(item.notes||[]).length+" notes");const syncFlag=item.syncConflict?' <span style="color:var(--color-text-warning);font-weight:600">⚠ unsynced</span>':(item.googleEventId?' <span style="color:var(--color-text-success)">↔</span>':'');const nameCls=item.completed?" dn":isPast?" past":"";return'<div class="ic'+(isSel?" sel":"")+'" data-id="'+item.id+'" data-type="'+type+'" draggable="true"><div class="iname'+nameCls+'">'+esc(item.title)+'</div><div class="imeta">'+meta+syncFlag+(dots?' <span style="display:inline-flex;gap:2px;vertical-align:middle">'+dots+'</span>':'')+'</div></div>';}).join("");return'<div><div class="bhdr"><div class="blbl"><div class="abar" style="background:'+color+'"></div><span class="btit">'+label+'</span><span class="bcnt">'+items.length+'</span></div>'+add+'</div><div data-bin="'+type+'" style="'+maxH+'">'+cards+'</div></div>';}
 function rTypePicker(at,sa){return'<div class="type-row">'+[["task","\u2610 Task"],["bullet","\u2022 Bullet"],["text","\u00b6 Text"],["header","\u2500 Header"],["link","\u2197 Link"]].map(([t,l])=>'<button class="tsb'+(at===t?" on":"")+'" data-a="'+sa+'" data-t="'+t+'">'+l+'</button>').join('')+'</div>';}
-function rMenuPanel(){const back=menuState==="menu"?'<button class="btn icon" data-a="close-menu"><i class="ti ti-x" style="font-size:13px"></i></button>':'<button class="btn icon" data-a="back-menu"><i class="ti ti-arrow-left" style="font-size:13px"></i></button>';const titles={menu:"Menu",settings:"Settings",hotkeys:"Hot Keys","export-cal":"Export Calendar","import-export":"Import / Export",archive:"Archive","cal-setup":"Google Sync"};const hdr='<div class="phdr"><div class="phdr-left">'+rNavBtns()+'<span>'+(titles[menuState]||"Menu")+'</span></div><div class="phdr-right">'+rUR()+'<div class="phdr-sep"></div>'+back+'</div></div>';if(menuState==="menu")return hdr+'<div>'+[["cal-setup","ti-cloud","Google Sync","Connect Google Calendar"],["settings","ti-settings","Settings","Items per section, templates, reset"],["export-cal","ti-calendar-export","Export Calendar","ICS or CSV"],["import-export","ti-file-import","Import / Export","Backup and restore"],["tmpl-project","ti-layout-list","Project Template","Auto-populate new projects"],["tmpl-meeting","ti-calendar","Meeting Template","Auto-populate new meetings"],["hotkeys","ti-keyboard","Hot Keys","Keyboard shortcuts"]].map(([s,ic,lb,sb])=>'<div class="mi" data-a="nav-menu" data-s="'+s+'"><i class="ti '+ic+'"></i><div><div>'+lb+'</div><div style="font-size:11px;color:var(--color-text-tertiary)">'+sb+'</div></div></div>').join('')+'<div style="border-top:0.5px solid var(--color-border-tertiary);margin-top:.75rem;padding-top:.75rem;font-size:12px;color:var(--color-text-tertiary);display:flex;gap:12px;flex-wrap:wrap"><a href="privacy.html" target="_blank" rel="noopener" style="color:var(--color-text-info)">Privacy Policy</a><a href="terms.html" target="_blank" rel="noopener" style="color:var(--color-text-info)">Terms</a></div></div>';if(menuState==="cal-setup"){
-  const calConnected=SETT.calendarConnected&&!!calendarAccessToken;
-  const driveConnected=SETT.driveConnected&&!!driveAccessToken;
-  return hdr+'<div><div style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);margin-bottom:1rem"><i class="ti ti-'+((calConnected||driveConnected)?'cloud-check':'cloud-off')+'" style="font-size:22px;color:'+((calConnected||driveConnected)?'var(--color-text-success)':'var(--color-text-tertiary)')+'"></i><div><div style="font-size:13px;font-weight:500;color:var(--color-text-primary)">Google Sync</div><div style="font-size:11px;color:var(--color-text-tertiary)">Connect to Google Calendar, Google Drive, both, or neither.</div></div></div><div class="slbl" style="margin-bottom:.5rem">Sync rules</div><div style="font-size:12px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:1rem">— Calendar sync: app-created meetings upload to Google Calendar, and selected Google Calendar colors can import into the planner<br>— Drive sync: planner backups save/load from your private Google Drive app storage<br>— Notes sync to Google Calendar only when the meeting notes toggle is on<br>— Each user uses their own browser data and their own Google account<br><span style="font-size:11px">Policies: <a href="privacy.html" target="_blank" rel="noopener" style="color:var(--color-text-info)">Privacy</a> · <a href="terms.html" target="_blank" rel="noopener" style="color:var(--color-text-info)">Terms</a></span></div>'+rGoogleConnectionPanel()+'<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:.75rem"><button class="btn" data-a="test-gcal">Test Google Calendar</button><button class="btn ok" data-a="sync-all-google">Sync planner ↔ Google</button></div>'+rSyncStatus()+rDriveBackupPanel()+rGoogleColorPicker()+'</div>';}
-if(menuState==="settings"){let b='<div class="sr"><div><div class="sl">Items per section</div><div class="ss">0 = unlimited</div></div><input id="sett-ips" type="number" min="0" max="20" value="'+SETT.itemsPerSection+'" style="width:60px;font-size:13px;padding:4px 8px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-secondary);color:var(--color-text-primary);outline:none;text-align:center"></div><div class="sr"><div><div class="sl">Linked items shown</div><div class="ss">0 = unlimited</div></div><input id="sett-lm" type="number" min="0" max="20" value="'+(SETT.linkedMeetingsCount||0)+'" style="width:60px;font-size:13px;padding:4px 8px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-secondary);color:var(--color-text-primary);outline:none;text-align:center"></div>';if(_clearStep===0)b+='<div style="margin-top:2rem"><div class="slbl">Danger zone</div><div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0"><div><div class="sl">Clear all data</div></div><button class="btn dng" data-a="clear-step1">Clear all\u2026</button></div></div>';else if(_clearStep===1)b+='<div class="cfm"><div style="font-size:14px;font-weight:500;color:var(--color-text-danger);margin-bottom:.5rem">\u26a0 Are you sure?</div><div style="font-size:13px;color:var(--color-text-secondary);margin-bottom:1rem">This permanently deletes ALL data.</div><div style="display:flex;gap:8px"><button class="btn dng" data-a="clear-step2">Yes</button><button class="btn" data-a="clear-cancel">Cancel</button></div></div>';else if(_clearStep===2)b+='<div class="cfm"><div style="font-size:14px;font-weight:500;color:var(--color-text-danger);margin-bottom:.5rem">Final confirmation</div><div style="font-size:13px;color:var(--color-text-secondary);margin-bottom:.75rem">Type <strong style="font-family:var(--font-mono)">RC26#$</strong> to confirm:</div><input id="clear-inp" class="finp" placeholder="RC26#$" autocomplete="off" style="margin-bottom:.75rem"/><div style="display:flex;gap:8px"><button class="btn dng" id="clear-confirm-btn" data-a="clear-confirm" disabled>Delete everything</button><button class="btn" data-a="clear-cancel">Cancel</button></div></div>';return hdr+b;}
+
+function rGoogleSyncHeader(){
+  normalizeSettings();
+  const cal=SETT.calendarConnected&&!!calendarAccessToken;
+  const drive=SETT.driveConnected&&!!driveAccessToken;
+  const icon=(cal||drive)?"cloud-check":"cloud-off";
+  return '<div class="gsync-hero"><i class="ti ti-'+icon+'"></i><div><div class="gsync-title">Google Sync</div><div class="gsync-sub">Connect Calendar for event sync and Drive for cross-device backups. You can use either one, both, or keep everything local.</div><div style="font-size:11px;margin-top:6px"><a href="privacy.html" target="_blank" rel="noopener" style="color:var(--color-text-info)">Privacy</a> · <a href="terms.html" target="_blank" rel="noopener" style="color:var(--color-text-info)">Terms</a></div></div></div>';
+}
+function rGoogleConnectionCards(){
+  normalizeSettings();
+  const cal=SETT.calendarConnected&&!!calendarAccessToken;
+  const drive=SETT.driveConnected&&!!driveAccessToken;
+  return '<div class="gsync-grid">'+
+    '<div class="gcard"><div class="gcard-head"><div class="gcard-title"><i class="ti ti-calendar"></i>Calendar</div><span class="gstatus '+(cal?'on':'')+'">'+(cal?'Connected':'Not connected')+'</span></div><div class="gmuted">Sync planner meetings to Google Calendar and import selected Google event colors.</div><div class="gactions"><button class="btn '+(cal?'':'pri')+'" data-a="connect-google-calendar">'+(cal?'Reconnect':'Connect')+'</button></div></div>'+
+    '<div class="gcard"><div class="gcard-head"><div class="gcard-title"><i class="ti ti-brand-google-drive"></i>Drive backup</div><span class="gstatus '+(drive?'on':'')+'">'+(drive?'Connected':'Not connected')+'</span></div><div class="gmuted">Save/load a private planner backup from your own Google Drive app storage.</div><div class="gactions"><button class="btn '+(drive?'':'pri')+'" data-a="connect-google-drive">'+(drive?'Reconnect':'Connect')+'</button><button class="btn ok" data-a="drive-save" '+(drive?'':'disabled')+'>Save</button><button class="btn" data-a="drive-load" '+(drive?'':'disabled')+'>Load</button></div></div>'+
+  '</div>'+
+  '<div class="gactions" style="margin:.3rem 0 .75rem"><button class="btn" data-a="connect-google-all">Connect both</button><button class="btn dng" data-a="disconnect-gcal">Disconnect Google</button></div>';
+}
+function rGooglePrimaryActions(){
+  normalizeSettings();
+  const cal=SETT.calendarConnected&&!!calendarAccessToken;
+  const drive=SETT.driveConnected&&!!driveAccessToken;
+  return '<div class="gprimary-row"><button class="btn ok" data-a="sync-all-google" '+(cal?'':'disabled')+'>Sync planner ↔ Calendar</button><button class="btn" data-a="drive-save" '+(drive?'':'disabled')+'>Save to Drive</button><button class="btn" data-a="test-gcal" '+(cal?'':'disabled')+'>Test Calendar</button><span class="gmini">'+(cal?'Calendar ready':'Connect Calendar to sync events')+' · '+(drive?'Drive ready':'Connect Drive to backup')+'</span></div>';
+}
+function rGoogleBackupSummary(){
+  normalizeSettings();
+  return '<div class="gcard soft"><div class="gcard-head"><div class="gcard-title"><i class="ti ti-database-export"></i>Drive backup</div><button class="btn" data-a="drive-check" style="font-size:11px;padding:3px 9px">Check</button></div>'+
+    '<div class="gmini">Last saved: '+tinyTime(SETT.lastDriveSavedAt)+'<br>Last loaded: '+tinyTime(SETT.lastDriveLoadedAt)+'<br>'+(SETT.lastDriveBackupModifiedAt?'Drive backup modified: '+tinyTime(SETT.lastDriveBackupModifiedAt):'Drive backup status: not checked')+'</div></div>';
+}
+function rGoogleImportDetails(){
+  return '<details class="gdetails"><summary><span><i class="ti ti-filter" style="font-size:14px;margin-right:5px;color:var(--color-text-secondary)"></i>Calendar import filters</span><span class="gmuted">colors, calendars, date window</span></summary><div class="gdetails-body"><div class="gmini" style="margin-bottom:8px">Planner meetings always upload to Google Calendar. Google → planner imports only use the calendars, colors, and date window selected below.</div>'+rGoogleColorPicker()+'</div></details>';
+}
+function rGoogleActivityDetails(){
+  return '<details class="gdetails"><summary><span><i class="ti ti-activity" style="font-size:14px;margin-right:5px;color:var(--color-text-secondary)"></i>Status & recent activity</span><span class="gmuted">last sync, conflicts, log</span></summary><div class="gdetails-body">'+rSyncStatus()+'</div></details>';
+}
+function rGoogleSyncPageBody(){
+  return rGoogleSyncHeader()+rGoogleConnectionCards()+rGooglePrimaryActions()+rGoogleBackupSummary()+rGoogleImportDetails()+rGoogleActivityDetails();
+}
+
+function rMenuPanel(){const back=menuState==="menu"?'<button class="btn icon" data-a="close-menu"><i class="ti ti-x" style="font-size:13px"></i></button>':'<button class="btn icon" data-a="back-menu"><i class="ti ti-arrow-left" style="font-size:13px"></i></button>';const titles={menu:"Menu",settings:"Settings",hotkeys:"Hot Keys","export-cal":"Export Calendar","import-export":"Import / Export",archive:"Archive","cal-setup":"Google Sync"};const hdr='<div class="phdr"><div class="phdr-left">'+rNavBtns()+'<span>'+(titles[menuState]||"Menu")+'</span></div><div class="phdr-right">'+rUR()+'<div class="phdr-sep"></div>'+back+'</div></div>';if(menuState==="menu")return hdr+'<div>'+[["cal-setup","ti-cloud","Google Sync","Connect Google Calendar"],["settings","ti-settings","Settings","Items per section, templates, reset"],["export-cal","ti-calendar-export","Export Calendar","ICS or CSV"],["import-export","ti-file-import","Import / Export","Backup and restore"],["tmpl-project","ti-layout-list","Project Template","Auto-populate new projects"],["tmpl-meeting","ti-calendar","Meeting Template","Auto-populate new meetings"],["hotkeys","ti-keyboard","Hot Keys","Keyboard shortcuts"]].map(([s,ic,lb,sb])=>'<div class="mi" data-a="nav-menu" data-s="'+s+'"><i class="ti '+ic+'"></i><div><div>'+lb+'</div><div style="font-size:11px;color:var(--color-text-tertiary)">'+sb+'</div></div></div>').join('')+'<div style="border-top:0.5px solid var(--color-border-tertiary);margin-top:.75rem;padding-top:.75rem;font-size:12px;color:var(--color-text-tertiary);display:flex;gap:12px;flex-wrap:wrap"><a href="privacy.html" target="_blank" rel="noopener" style="color:var(--color-text-info)">Privacy Policy</a><a href="terms.html" target="_blank" rel="noopener" style="color:var(--color-text-info)">Terms</a></div></div>';if(menuState==="cal-setup"){return hdr+rGoogleSyncPageBody();}
+  if(menuState==="settings"){let b='<div class="sr"><div><div class="sl">Items per section</div><div class="ss">0 = unlimited</div></div><input id="sett-ips" type="number" min="0" max="20" value="'+SETT.itemsPerSection+'" style="width:60px;font-size:13px;padding:4px 8px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-secondary);color:var(--color-text-primary);outline:none;text-align:center"></div><div class="sr"><div><div class="sl">Linked items shown</div><div class="ss">0 = unlimited</div></div><input id="sett-lm" type="number" min="0" max="20" value="'+(SETT.linkedMeetingsCount||0)+'" style="width:60px;font-size:13px;padding:4px 8px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-secondary);color:var(--color-text-primary);outline:none;text-align:center"></div>';if(_clearStep===0)b+='<div style="margin-top:2rem"><div class="slbl">Danger zone</div><div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0"><div><div class="sl">Clear all data</div></div><button class="btn dng" data-a="clear-step1">Clear all\u2026</button></div></div>';else if(_clearStep===1)b+='<div class="cfm"><div style="font-size:14px;font-weight:500;color:var(--color-text-danger);margin-bottom:.5rem">\u26a0 Are you sure?</div><div style="font-size:13px;color:var(--color-text-secondary);margin-bottom:1rem">This permanently deletes ALL data.</div><div style="display:flex;gap:8px"><button class="btn dng" data-a="clear-step2">Yes</button><button class="btn" data-a="clear-cancel">Cancel</button></div></div>';else if(_clearStep===2)b+='<div class="cfm"><div style="font-size:14px;font-weight:500;color:var(--color-text-danger);margin-bottom:.5rem">Final confirmation</div><div style="font-size:13px;color:var(--color-text-secondary);margin-bottom:.75rem">Type <strong style="font-family:var(--font-mono)">RC26#$</strong> to confirm:</div><input id="clear-inp" class="finp" placeholder="RC26#$" autocomplete="off" style="margin-bottom:.75rem"/><div style="display:flex;gap:8px"><button class="btn dng" id="clear-confirm-btn" data-a="clear-confirm" disabled>Delete everything</button><button class="btn" data-a="clear-cancel">Cancel</button></div></div>';return hdr+b;}
 if(menuState==="hotkeys")return hdr+'<div>'+[["Ctrl+D","Open due & upcoming panel"],["Ctrl+C","Copy item or selected notes"],["Ctrl+B / I / U","Bold / italic / underline"],["Alt+\u2190 \u2192","Back / forward navigation"],["Ctrl+click","Toggle select note"],["Shift+click","Range select notes"],["Drag right \u2192","Indent note one level"],["Drag left \u2190","Unindent note"],["Ctrl+Z / Y","Undo / Redo"],["Ctrl+N/P/M","New / project / meeting"],["Alt+T/B/X/H/L","Switch note type"],["Empty Enter","Clear sub-context"]].map(([k,d])=>'<div class="hkr"><span class="hkd">'+d+'</span><span class="hkk">'+k+'</span></div>').join('')+'</div>';
 if(menuState==="export-cal"){const fmtBtns=["ics","csv"].map(f=>'<button class="tsb'+(_expFmt===f?" on":"")+'" data-a="exp-fmt" data-v="'+f+'">'+f.toUpperCase()+'</button>').join("");const modeBtns=[["all","All"],["upcoming","Upcoming"],["select","Select\u2026"]].map(([v,l])=>'<button class="tsb'+(_expMode===v?" on":"")+'" data-a="exp-mode" data-v="'+v+'">'+l+'</button>').join("");let sl="";if(_expMode==="select"){sl='<div style="margin-top:.5rem;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);overflow:hidden;max-height:220px;overflow-y:auto"><div style="padding:5px 8px;display:flex;gap:8px"><button class="btn" style="font-size:11px;padding:2px 8px" data-a="exp-sel-all">All</button><button class="btn" style="font-size:11px;padding:2px 8px" data-a="exp-sel-none">None</button></div>'+D.meetings.map(m=>'<div class="ci" data-a="exp-sel-tog" data-id="'+m.id+'"><input type="checkbox" '+(_expSelIds.has(m.id)?"checked":"")+'><div><div class="ci-txt">'+esc(m.title)+'</div></div></div>').join('')+'</div>';}return hdr+'<div><div class="slbl">Format</div><div class="type-row" style="margin-bottom:.75rem">'+fmtBtns+'</div><div class="slbl">Include</div><div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:.5rem">'+modeBtns+'</div>'+sl+'<button class="btn pri" data-a="do-exp-cal" style="margin-top:.75rem;width:100%">Export</button></div>';}
 if(menuState==="import-export"){let imp=_impData?'<div style="margin-top:.5rem">'+(_impDupes.length>0?'<div style="border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);overflow:hidden;max-height:180px;overflow-y:auto">'+_impDupes.map(d=>'<div class="ci" data-a="imp-dupe-tog" data-id="'+d.item.id+'"><input type="checkbox" '+(_impSkip.has(d.item.id)?"":"checked")+'><div><div class="ci-txt">'+esc(d.item.title)+'</div><div class="ci-sub">'+d.reason+'</div></div></div>').join('')+'</div>':"")+'<div style="display:flex;gap:8px;margin-top:.5rem"><button class="btn pri" data-a="do-import">Import</button><button class="btn" data-a="cancel-import">Cancel</button></div></div>':'<div style="display:flex;flex-direction:column;gap:6px"><button class="btn" data-a="pick-import-file" style="align-self:flex-start">Choose file\u2026</button><input type="file" id="impfileinp" accept=".json" style="display:none">'+(_impErr?'<div style="font-size:12px;color:var(--color-text-danger)">'+esc(_impErr)+'</div>':"")+'</div>';return hdr+'<div><div class="slbl">Export</div><button class="btn" data-a="do-exp-full" style="margin-bottom:1rem">Export all data\u2026</button><hr class="sep"><div class="slbl">Import</div>'+imp+'</div>';}
