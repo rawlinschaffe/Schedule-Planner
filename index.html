@@ -287,7 +287,7 @@ function sortMeetingsList(arr,past=false){const a=[...arr].sort(compareMeetingTi
 function groupByDate(items){const out=[];let last="";for(const it of items){const key=fmtDMY(it.date);if(key!==last){out.push({header:key,day:dayName(it.date),groupType:"date",groupKey:"date:"+key});last=key;}out.push(it);}return out;}
 function firstCat(item){return(item.categoryIds||[]).map(getCat).filter(Boolean)[0]||null;}
 function firstSubcatForCat(item,catId){const subs=itemSubcats(item);if(!subs.length)return null;return subs.find(sc=>getSubcatParent(sc.id)?.id===catId)||subs[0]||null;}
-function groupByCat(items){const out=[];let lastCat="__none__",lastSub="__none__";for(const it of items){const c=firstCat(it);const catId=c?.id||"uncat";const catName=c?c.name:"Uncategorized";if(catId!==lastCat){out.push({header:catName,catId:c?.id||null,groupType:"cat",groupKey:"cat:"+catId});lastCat=catId;lastSub="__none__";}const sc=c?firstSubcatForCat(it,c.id):null;const subId=sc?.id||"nosub";const subName=sc?sc.name:"No subcategory";if(subId!==lastSub){out.push({subheader:subName,subcatId:sc?.id||null,catId:c?.id||null,groupType:"subcat",groupKey:"subcat:"+catId+":"+subId});lastSub=subId;}out.push(it);}return out;}
+function groupByCat(items){const out=[];let lastCat="__none__",lastSub="__none__";for(const it of items){const c=firstCat(it);const catId=c?.id||"uncat";const catName=c?c.name:"Uncategorized";if(catId!==lastCat){out.push({header:catName,catId:c?.id||null,groupType:"cat",groupKey:"cat:"+catId});lastCat=catId;lastSub="__none__";}const sc=c?firstSubcatForCat(it,c.id):null;if(sc){const subId=sc.id;if(subId!==lastSub){out.push({subheader:sc.name,subcatId:sc.id,catId:c?.id||null,groupType:"subcat",groupKey:"subcat:"+catId+":"+subId});lastSub=subId;}}else{lastSub="__none__";}out.push(it);}return out;}
 function updateItemNotes(notes){if(menuState==="tmpl-project"||menuState==="tmpl-meeting"){const t=menuState==="tmpl-project"?"project":"meeting";if(!SETT.templates)SETT.templates={project:[],meeting:[]};
   if(typeof SETT.intuitiveSortProjects!=="boolean")SETT.intuitiveSortProjects=true;
   if(typeof SETT.intuitiveSortMeetings!=="boolean")SETT.intuitiveSortMeetings=true;SETT.templates[t]=notes;saveSett();return;}if(!sel)return;if(sel.type==="project")D.projects=D.projects.map(p=>p.id!==sel.id?p:{...p,notes});else D.meetings=D.meetings.map(m=>m.id!==sel.id?m:{...m,notes,updatedAt:new Date().toISOString()});}
@@ -1128,27 +1128,30 @@ function rBin(label,color,items,type,canAdd,isPast,key){
   let list=items;
   if(groupedMeetings)list=groupByDate(items);
   else if(groupedActiveProjects)list=groupByCat(items);
-  let hideGroup=null;
+  let hideGroup=null,hideCat=false,hideSub=false;
   const renderCard=(item)=>{
     if(item.header){
+      const gkey=groupCollapseKey(key,item.groupKey);
+      const gcol=!!SETT.collapsedGroups[gkey];
       if(type==="meeting"){
-        const gkey=groupCollapseKey(key,item.groupKey);
-        const gcol=!!SETT.collapsedGroups[gkey];
         hideGroup=gcol?gkey:null;
         return '<div class="bin-subheader '+(gcol?'grp-closed':'grp-open')+'" data-a="toggle-group-collapse" data-key="'+esc(gkey)+'" title="Click to collapse or expand"><span>'+esc(item.header)+'</span><span class="day">'+esc(item.day||"")+'</span><span class="chev">'+(gcol?'▸':'▾')+'</span></div>';
       }
       hideGroup=null;
+      hideCat=gcol;
+      hideSub=false;
       const hc=item.catId?getCat(item.catId):null;
-      return '<div class="bin-subheader">'+(hc?mainCatDot(hc,'cat-header-dot'):'')+'<span>'+esc(item.header)+'</span></div>';
+      return '<div class="bin-subheader '+(gcol?'grp-closed':'grp-open')+'" data-a="toggle-group-collapse" data-key="'+esc(gkey)+'" title="Click to collapse or expand">'+(hc?mainCatDot(hc,'cat-header-dot'):'')+'<span>'+esc(item.header)+'</span><span class="chev">'+(gcol?'▸':'▾')+'</span></div>';
     }
     if(item.subheader){
       const gkey=groupCollapseKey(key,item.groupKey);
       const gcol=!!SETT.collapsedGroups[gkey];
-      hideGroup=gcol?gkey:null;
+      hideSub=gcol;
       const sc=item.subcatId?getSubcat(item.subcatId):null;
-      return '<div class="bin-subheader subgrp '+(gcol?'grp-closed':'grp-open')+'" data-a="toggle-group-collapse" data-key="'+esc(gkey)+'" title="Click to collapse or expand">'+(sc?subcatMark(sc):'<span style="width:9px;height:9px;border-radius:99px;border:0.5px dashed var(--color-border-secondary);display:inline-block"></span>')+'<span>'+esc(item.subheader)+'</span><span class="chev">'+(gcol?'▸':'▾')+'</span></div>';
+      if(hideCat)return "";
+      return '<div class="bin-subheader subgrp '+(gcol?'grp-closed':'grp-open')+'" data-a="toggle-group-collapse" data-key="'+esc(gkey)+'" title="Click to collapse or expand">'+(sc?subcatMark(sc):'')+'<span>'+esc(item.subheader)+'</span><span class="chev">'+(gcol?'▸':'▾')+'</span></div>';
     }
-    if(hideGroup)return "";
+    if(hideGroup||hideCat||hideSub)return "";
     const isSel=sel?.id===item.id;
     const mainMarks=(groupedActiveProjects?[]:(item.categoryIds||[]).map(getCat).filter(Boolean).map(mainCatDot)).join("");
     const subMarks=itemSubcats(item).map(subcatMark).join("");
